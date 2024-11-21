@@ -1,8 +1,11 @@
 package com.alexandre.webService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -18,6 +21,10 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String phone;
+
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
     public User(){};
 
