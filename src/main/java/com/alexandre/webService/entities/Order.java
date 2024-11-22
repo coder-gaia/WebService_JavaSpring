@@ -1,6 +1,5 @@
 package com.alexandre.webService.entities;
 
-
 import com.alexandre.webService.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;

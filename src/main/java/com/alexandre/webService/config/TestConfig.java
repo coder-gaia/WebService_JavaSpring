@@ -1,8 +1,10 @@
 package com.alexandre.webService.config;
 
+import com.alexandre.webService.entities.Category;
 import com.alexandre.webService.entities.Order;
 import com.alexandre.webService.entities.User;
 import com.alexandre.webService.entities.enums.OrderStatus;
+import com.alexandre.webService.repositories.CategoryRepository;
 import com.alexandre.webService.repositories.OrderRepository;
 import com.alexandre.webService.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,19 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat = new Category(null, "Electronics");
+        Category cat_2 = new Category(null, "Books");
+        Category cat_3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat, cat_2, cat_3));
+
         User u = new User(null, "James", "james@gmail.com", "jamie123", "42668964925");
         User u_2 = new User(null, "Cersei", "bitch@gmail.com", "bitch123", "42218961963");
 
