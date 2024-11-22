@@ -1,7 +1,6 @@
 package com.alexandre.webService.services;
 
 import com.alexandre.webService.entities.Category;
-import com.alexandre.webService.entities.Order;
 import com.alexandre.webService.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

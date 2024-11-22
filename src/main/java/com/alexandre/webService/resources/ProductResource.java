@@ -1,7 +1,7 @@
 package com.alexandre.webService.resources;
 
-import com.alexandre.webService.entities.Category;
-import com.alexandre.webService.services.CategoryService;
+import com.alexandre.webService.entities.Product;
+import com.alexandre.webService.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +14,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
+@RequestMapping(value = "/products")
+public class ProductResource {
 
     @Autowired
-    private CategoryService categoryService;
+    private ProductService productService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Category>> findAll(){
-        return new ResponseEntity<>(categoryService.findAllOrders(), HttpStatusCode.valueOf(200));
+    public ResponseEntity<List<Product>> findAll(){
+        return new ResponseEntity<>(productService.findAllOrders(), HttpStatusCode.valueOf(200));
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Optional<Category>> findById(@PathVariable Long id){
-        return new ResponseEntity<>(categoryService.findById(id), HttpStatusCode.valueOf(200));
+    public ResponseEntity<Optional<Product>> findById(@PathVariable Long id){
+        return new ResponseEntity<>(productService.findById(id), HttpStatusCode.valueOf(200));
     }
 }
