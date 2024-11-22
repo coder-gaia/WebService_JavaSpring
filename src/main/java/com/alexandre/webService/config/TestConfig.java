@@ -2,6 +2,7 @@ package com.alexandre.webService.config;
 
 import com.alexandre.webService.entities.Order;
 import com.alexandre.webService.entities.User;
+import com.alexandre.webService.entities.enums.OrderStatus;
 import com.alexandre.webService.repositories.OrderRepository;
 import com.alexandre.webService.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class TestConfig implements CommandLineRunner {
         User u = new User(null, "James", "james@gmail.com", "jamie123", "42668964925");
         User u_2 = new User(null, "Cersei", "bitch@gmail.com", "bitch123", "42218961963");
 
-        Order order = new Order(null, Instant.parse("2024-11-21T20:53:07Z"), u);
-        Order order_2 = new Order(null, Instant.parse("2024-11-20T21:53:07Z"), u_2);
-        Order order_3 = new Order(null, Instant.parse("2024-11-15T10:53:07Z"), u);
+        Order order = new Order(null, Instant.parse("2024-11-21T20:53:07Z"), u, OrderStatus.PAID);
+        Order order_2 = new Order(null, Instant.parse("2024-11-20T21:53:07Z"), u_2, OrderStatus.WAITING_PAYMENT);
+        Order order_3 = new Order(null, Instant.parse("2024-11-15T10:53:07Z"), u, OrderStatus.WAITING_PAYMENT);
 
         userRepository.saveAll(Arrays.asList(u, u_2));
 
