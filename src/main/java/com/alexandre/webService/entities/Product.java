@@ -1,5 +1,7 @@
 package com.alexandre.webService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -29,6 +31,10 @@ public class Product implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.product", fetch = FetchType.EAGER)
+    private Set<OrderItem> items = new HashSet<>();
+
     public Product(){}
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
@@ -37,6 +43,15 @@ public class Product implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for(OrderItem oi : items){
+            set.add(oi.getOrder());
+        }
+        return set;
     }
 
     @Override
