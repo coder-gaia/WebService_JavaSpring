@@ -1,14 +1,8 @@
 package com.alexandre.webService.config;
 
-import com.alexandre.webService.entities.Category;
-import com.alexandre.webService.entities.Order;
-import com.alexandre.webService.entities.Product;
-import com.alexandre.webService.entities.User;
+import com.alexandre.webService.entities.*;
 import com.alexandre.webService.entities.enums.OrderStatus;
-import com.alexandre.webService.repositories.CategoryRepository;
-import com.alexandre.webService.repositories.OrderRepository;
-import com.alexandre.webService.repositories.ProductRepository;
-import com.alexandre.webService.repositories.UserRepository;
+import com.alexandre.webService.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -67,5 +64,12 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u, u_2));
         orderRepository.saveAll(Arrays.asList(order, order_2, order_3));
+
+        OrderItem oi1 = new OrderItem(order, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(order, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(order_2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(order_3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }

@@ -4,10 +4,13 @@ import com.alexandre.webService.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,6 +29,10 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @Getter
+    @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER)
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order(){}
 

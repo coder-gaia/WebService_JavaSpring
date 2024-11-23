@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String password;
     private String phone;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 

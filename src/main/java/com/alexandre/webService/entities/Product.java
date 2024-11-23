@@ -2,6 +2,7 @@ package com.alexandre.webService.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
+    @Getter
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -35,10 +37,6 @@ public class Product implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
     }
 
     @Override
