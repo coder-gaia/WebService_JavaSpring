@@ -29,4 +29,8 @@ public class UserResource {
         return new ResponseEntity<>(userService.findById(id), HttpStatusCode.valueOf(200));
     }
 
+    @PostMapping("/insert")
+    public ResponseEntity<User> insert(@RequestBody User user){
+        return new ResponseEntity<>(userService.insert(user), HttpStatusCode.valueOf(201));
+    }
 }
