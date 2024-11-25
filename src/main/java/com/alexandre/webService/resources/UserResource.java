@@ -35,8 +35,9 @@ public class UserResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/update/{id}")
