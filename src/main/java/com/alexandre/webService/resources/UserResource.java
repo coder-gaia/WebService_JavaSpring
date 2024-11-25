@@ -2,6 +2,7 @@ package com.alexandre.webService.resources;
 
 import com.alexandre.webService.entities.User;
 import com.alexandre.webService.services.UserService;
+import com.alexandre.webService.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,9 @@ public class UserResource {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Long id){
-//        Optional<User> obj = userService.findById(id);
-//        return ResponseEntity.ok().body(obj);
-        return new ResponseEntity<>(userService.findById(id), HttpStatusCode.valueOf(200));
+    public User findById(@PathVariable Long id){
+      Optional<User> obj = userService.findById(id);
+      return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @PostMapping("/insert")
@@ -38,4 +38,10 @@ public class UserResource {
     public void delete(@PathVariable Long id){
         userService.delete(id);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+        return new ResponseEntity<>(userService.update(id, user), HttpStatusCode.valueOf(204));
+    }
+
 }
